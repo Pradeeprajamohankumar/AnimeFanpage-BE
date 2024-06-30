@@ -40,6 +40,9 @@ def signup():
     }
     collection.insert_one(user)
     return jsonify({'success': True}), 201
+@app.route('/health')
+def health_check():
+    return 'OK', 200
 
 @app.route('/login', methods=['POST'])
 def login():
