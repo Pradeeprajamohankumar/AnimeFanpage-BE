@@ -102,6 +102,13 @@ def get_characters():
     for character in characters:
         character['_id'] = str(character['_id'])  # Convert ObjectId to string
     return jsonify(characters), 200
+@app.route('/characters/<string:id>', methods=['DELETE'])
+def delete_character(id):
+    result = char_db.delete_one({'_id': ObjectId(id)})
+    if result.deleted_count == 1:
+        return jsonify({'success': True}), 200
+    else:
+        return jsonify({'error': 'Character not found'}), 404
 @app.route('/characters/<string:id>', methods=['PUT'])
 def update_character(id):
     data = request.json
