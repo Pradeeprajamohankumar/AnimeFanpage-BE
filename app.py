@@ -20,6 +20,9 @@ client = MongoClient(
 db = client['MYDB']
 collection = db['users']
 char_db = db['characters']
+@app.route('/')
+def index():
+    return 'Server is running'
 
 @app.route('/signup', methods=['POST'])
 def signup():
